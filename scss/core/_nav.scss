@@ -1,0 +1,29 @@
+// css navigator (Menu)
+.nav {
+  &.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  @include size(100%, 100vh);
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
+  top: calc(0 + var(--height-header));
+  left: 0;
+  background-color: $black-cl;
+  @include transition(0.5s);
+  .menunav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    &_item {
+      margin: 15px auto;
+      text-align: center;
+      a {
+        @include text(1.8rem, "pb", 2.4rem, $white-cl, uppercase);
+      }
+    }
+  }
+}

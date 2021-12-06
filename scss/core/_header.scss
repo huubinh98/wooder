@@ -1,0 +1,238 @@
+header {
+	&.activebg {
+		background: $black-cl;
+	}
+	--width-logo: 177px;
+	--top: -10px;
+	@include size(100%, var(--height-header));
+	background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, transparent 100%);
+	// background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, transparent 100%);
+	position: fixed;
+	z-index: 10;
+	.container-fluid {
+		height: 100%;
+		@include flex(space-between, center);
+		position: relative;
+	}
+	.logo {
+		&_link {
+			display: flex;
+			img {
+				width: var(--width-logo);
+			}
+		}
+	}
+
+	.menu {
+		@include flex(space-between, center);
+		@include mid;
+		height: 100%;
+		&_item {
+			padding: 0 22px;
+			height: 100%;
+			display: flex;
+			align-items: center;
+			a {
+				@include text(1.5rem, "pb", 2.25rem, $white-cl, uppercase);
+				letter-spacing: 0.025em;
+				@include transition($t linear);
+				opacity: 0.5;
+				position: relative;
+				&:before {
+					content: "";
+					@include size(100%, 2px);
+					position: absolute;
+					left: 0;
+					bottom: var(--top);
+					background-color: $wooder-cl;
+					@include transform(scaleX(0));
+					@include transform-origin(right);
+					@include transition(0.3s transform ease-in-out);
+				}
+				&:hover {
+					color: $wooder-cl;
+					opacity: 1;
+					&::before {
+						@include transform(scaleX(1));
+						@include transform-origin(left);
+						// @include transition($t);
+						// transform: scaleX(1);
+						// transform-origin: left;
+					}
+				}
+				&.active {
+					color: $wooder-cl;
+					opacity: 1;
+					&::before {
+						@include transform(scaleX(1));
+						@include transform-origin(left);
+						// @include transition($t);
+						// transform: scaleX(1);
+						// transform-origin: left;
+					}
+				}
+			}
+		}
+	}
+
+	.right {
+		--pd-r: 14px;
+		height: 100%;
+		@include flex(center, center);
+		.lang {
+			height: 100%;
+			position: relative;
+			&_current {
+				height: 100%;
+				@include flex(center, center);
+				@include text(1.5rem, "pb", 2.25rem, $white-cl, uppercase);
+				opacity: 0.5;
+				padding-right: var(--pd-r);
+				cursor: pointer;
+				@include transition($t);
+				position: relative;
+				&:after {
+					content: "";
+					@include mid;
+					left: 88%;
+					// border-width: 4px 9px;
+					// border-style: solid;
+					// border-color: $white-cl, transparent, transparent, transparent;
+					border-top: 0.4rem solid $white-cl;
+					border-right: 0.4rem solid transparent;
+					border-left: 0.4rem solid transparent;
+					@include transition($t);
+				}
+				&:hover::after {
+					border-top: 0.4rem solid $wooder-cl;
+				}
+				&:hover {
+					color: $wooder-cl;
+					opacity: 1;
+				}
+			}
+			&_options {
+				position: absolute;
+				right: 0;
+				top: calc(100% + var(--top));
+				text-align: right;
+				opacity: 0;
+				pointer-events: none;
+				transition: $t;
+				a {
+					opacity: 0.5;
+					@include text(1.5rem, "pb", 2.25rem, $white-cl, uppercase);
+					@include flex(flex-end, center);
+					background-color: $black-cl;
+					@include size(70px, 34px);
+					padding-right: var(--pd-r);
+					border-bottom: 1px solid #393939;
+					@include transition($t);
+					position: relative;
+					&:before {
+						content: "";
+						@include size(100%, 2px);
+						position: absolute;
+						left: 0;
+						bottom: 0;
+						background-color: $wooder-cl;
+						@include transform(scaleX(0));
+						@include transform-origin(right);
+						@include transition(0.3s transform ease-in-out);
+						z-index: 1;
+					}
+					&:hover {
+						color: $wooder-cl;
+						opacity: 1;
+						&::before {
+							@include transform(scaleX(1));
+							@include transform-origin(left);
+						}
+					}
+				}
+			}
+			&.active {
+				.lang_options {
+					opacity: 1;
+					pointer-events: auto;
+				}
+			}
+			// &:hover {
+			// 	.lang_options {
+			// 		display: block;
+			// 		@include transition($t);
+			// 	}
+			// }
+		}
+		.btnbar {
+			@include size(30px, 22px);
+			margin-left: 15px;
+			cursor: pointer;
+			position: relative;
+			// @include transition($t);
+			display: none;
+			span {
+				@include size(100%, 2px);
+				position: absolute;
+				top: 50%;
+				@include transform(translateY(-50%));
+				// @include transition($t);
+				background-color: $white-cl;
+			}
+			&::after,
+			&::before {
+				content: "";
+				display: block;
+				@include size(100%, 2px);
+				@include transform(rotate(0deg) translateY(0));
+				background-color: $white-cl;
+			}
+			&::after {
+				position: absolute;
+				bottom: 0;
+			}
+			&.clicked {
+				&:before {
+				  @include transform(rotate(45deg) translate(6px, 8px));
+				  @include transition(transform $t);
+				}
+				span {
+				  opacity: 0;
+				  @include transition($t);
+				}
+				&:after {
+				  @include transform(rotate(-45deg) translate(6px, -8px));
+				  @include transition(transform $t);
+				}
+			  }
+			&:hover span,
+			&:hover::after,
+			&:hover::before {
+				background-color: $wooder-cl;
+			}
+		}
+	}
+
+	@include maxW(1040px) {
+		.menu {
+			&_item {
+				padding: 0 18px;
+			}
+		}
+	}
+	@include sm {
+		background: $black-cl;
+		.menu {
+			display: none;
+		}
+		.right {
+			.btnbar {
+				display: block;
+			}
+		}
+	}
+
+	@include xs {
+		--width-logo: 150px;
+	}
+}

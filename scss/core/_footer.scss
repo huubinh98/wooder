@@ -1,0 +1,47 @@
+// css footer
+footer {
+    margin-top: calc(var(--pd-section) / 2);
+    background: #000;
+    // height: 56px;
+    .container {
+        position: relative;
+        @include flex(space-between, center);
+        padding: 20px 0;
+    }
+    .logo {
+        @include mid;
+        img {
+            display: block;
+            width: 177px;
+        }
+    }
+    .primary,
+    .toback span {
+        @include text(1.2rem, "pr", 2.8rem, $white-cl, inherit);
+        letter-spacing: 0.5px;
+        opacity: 0.5;
+        @include transition($t);
+    }
+    .toback span {
+        cursor: pointer;
+    }
+    .toback {
+        text-transform: uppercase;
+        &:hover {
+            span {
+                opacity: 1;
+                color: $wooder-cl;
+            }
+        }
+    }
+
+    @include xs {
+        height: 150px;
+        .container {
+            padding: 10px 0;
+            min-height: 150px;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+    }
+}

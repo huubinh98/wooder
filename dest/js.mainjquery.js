@@ -460,6 +460,15 @@ $(document).ready(function () {
               lgComment],
     });
 
+
+
+    // paroller
+    $('.intro').paroller({ 
+        factor: 0.2, 
+        factorXs: 0.2, 
+        type: 'foreground', 
+        direction: 'vertical' });
+
     // AOS ANIMATE
     AOS.init();
 
